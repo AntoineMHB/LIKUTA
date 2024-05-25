@@ -4,12 +4,12 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-//Routes
+// Routes
 import Dashboard, { dashboardAction, dashboardLoader } from "./pages/Dashboard";
 import Error from "./pages/Error";
 import ExpensesPage, { expensesAction, expensesLoader } from "./pages/ExpensesPage";
 
-//Layouts
+// Layouts
 import Main, { mainLoader } from "./layouts/Main";
 
 // Actions 
@@ -19,22 +19,12 @@ import { logoutAction } from "./actions/logout";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// Components
+import { BudgetProvider } from "./actions/BudgetContext";
+import Signup from "./components/Signup";
+import TheDash, { thedashLoader } from "./components/TheDash";
 
-// We define the Root component
-//const Root = () => <div>Hi</div>;
 
-// We define the Team component
-//const About = () => <div>About us</div>;
-
-// We define the loaders
-// const rootLoader = () => {
-//   // Implement the loader function to return a value or null
-//   return null;
-// };
-// const teamLoader = () => {
-//   // Implement the loader function to return a value or null
-//   return null;
-// };
 
 const router = createBrowserRouter([
   {
@@ -43,42 +33,44 @@ const router = createBrowserRouter([
     loader: mainLoader,
     errorElement: <Error />,
     children: [  
-    {
-       index: true,
-       element:  <Dashboard />,
-       loader: dashboardLoader,
-       action: dashboardAction,
-       errorElement: <Error />
-    },
-     {
-       path: "expenses",
-       element:  <ExpensesPage />,
-       loader: expensesLoader,
-       action: expensesAction,
-    },
-    {
+      {
+        index: true,
+        element:  <Dashboard />,
+        loader: dashboardLoader,
+        action: dashboardAction,
+        errorElement: <Error />
+      },
+      {
+        path: "theDash/expenses",
+        element:  <ExpensesPage />,
+        loader: expensesLoader,
+        action: expensesAction,
+      },
+      {
+        path: "signup",
+        element:  <Signup />,
+      },
+      {
+        path: "theDash",
+        element:  <TheDash />,
+        loader: thedashLoader,
+      },
+      {
         path: "logout",
         action: logoutAction,
-    }
-
-   ]
-  }, 
- 
-      // {
-      //   path: "/about",
-      //   element: <About />,
-      // //  loader: teamLoader,
-      // },
-    
-  
+      }
+    ]
+  }
 ]);
 
 function App() {
   return (
-    <div className="App">
-      <RouterProvider router={router} />
-      <ToastContainer />
-    </div>
+    <BudgetProvider> {/* Ensure the context provider is here */}
+      <div className="App">
+        <RouterProvider router={router} />
+        <ToastContainer />
+      </div>
+    </BudgetProvider>
   );
 }
 

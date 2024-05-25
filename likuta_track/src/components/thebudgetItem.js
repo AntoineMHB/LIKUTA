@@ -3,7 +3,7 @@ import React from 'react';
 // helper functions
 import { calculateSpentByBudget, formatCurrency, formatPercentage } from '../helpers';
 
-const BudgetItem = ({ budget }) => {
+const thebudgetItem = ({ budget }) => {
     const {id, budgetname, amount, color} = budget;
     const spent = calculateSpentByBudget(id);
 
@@ -30,4 +30,4 @@ const BudgetItem = ({ budget }) => {
   )
 }
 
-export default BudgetItem;
+export default thebudgetItem;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 //react-route-dom imports
 import { Link, useLoaderData } from 'react-router-dom';
@@ -12,18 +12,16 @@ import Intro from '../components/Intro';
 import { toast } from 'react-toastify';
 
 // components
-import Error from './Error';
 import AddBudgetForm from '../components/AddBudgetForm';
 import AddExpenseForm from '../components/AddExpenseForm';
-import AddIncomesForm from '../components/AddIncomesForm';
 import AddFinancialGoalForm from '../components/AddFinancialGoalForm';
+import AddIncomesForm from '../components/AddIncomesForm';
 import BudgetItem from '../components/Budgetitem';
 import Table from '../components/Table';
+import Error from './Error';
 
 // helper functions
-import { createBudget, createFinancialGoal, deleteItem } from '../helpers';
-import { createExpense } from '../helpers';
-import { createIncome, fetchData, waait } from '../helpers';
+import { createBudget, createExpense, createFinancialGoal, createIncome, deleteItem, fetchData, waait } from '../helpers';
 
 // loader
 export function dashboardLoader()

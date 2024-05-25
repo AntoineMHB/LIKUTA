@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 // helpers
 import { deleteItem, fetchData } from '../helpers';
@@ -44,7 +44,7 @@ export const ExpensesPage = () => {
     const { expenses } = useLoaderData()
   return (
     <div className="grid-lg">
-      <h1>All Expenses</h1>
+      <h1>All Your Expenses</h1>
       {
         expenses && expenses.length > 0 ? (
             <div className="grid-md">

@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 // helper import
-import { formatCurrency, formatDateToLocaleString, getAllMatchingItems } from '../helpers'
+import { formatCurrency, formatDateToLocaleString, getAllMatchingItems } from '../helpers';
 
 // rrd imports
 import { Link, useFetcher } from 'react-router-dom';
@@ -18,7 +18,7 @@ const ExpenseItem = ({ expense }) => {
     })[0];
   return (
     <>
-      <td>{expense.name}</td>
+      <td>{expense.expensename}</td>
       <td>{formatCurrency(expense.amount)}</td>
       <td>{formatDateToLocaleString (expense.createAt)}</td>
       <td><Link

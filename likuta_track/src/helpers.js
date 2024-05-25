@@ -1,11 +1,13 @@
 export const waait = () => new Promise(res => setTimeout(
     res, Math.random() * 2000))
 
-// colors
-const generateRandomColor =() => {
-    const existingBudgetLength = fetchData("budgets")?.length ?? 0;
-    return `${existingBudgetLength * 34} 65% 50%`
-}
+// Function to generate a random color
+const generateRandomColor = () => {
+  const hue = Math.floor(Math.random() * 360);
+  const saturation = 65; // Percentage
+  const lightness = 50; // Percentage
+  return `${hue} ${saturation}% ${lightness}%`;
+};
 
 //Local storage
 export const fetchData = (key, dataType = 'json') => {
@@ -44,20 +46,37 @@ export const deleteItem = ({ key, id}) => {
 }
 
 //create budget
-export const createBudget = ({
-    name, amount
-}) =>{
-    const newItem = {
-        id: crypto.randomUUID(),
-        name: name,
-        createAt: Date.now(),
-        amount: +amount,
-        color: generateRandomColor()
+// export const createBudget = ({
+//     name, amount
+// }) =>{
+//     const newItem = {
+//         id: crypto.randomUUID(),
+//         name: name,
+//         createAt: Date.now(),
+//         amount: +amount,
+//         color: generateRandomColor()
+//     }
+//     const existingBudgets = fetchData("budgets") ?? [];
+//     return localStorage.setItem("budgets",
+//         JSON.stringify([...existingBudgets, newItem])
+//     )
+// };
+
+export const createBudget = async ({ budgetname, amount }) => {
+    try {
+        const response = await fetch('/budgets', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ budgetname, amount })
+        });
+        if (!response.ok) {
+            throw new Error('Failed to create budget');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error creating budget:', error);
+        throw error;
     }
-    const existingBudgets = fetchData("budgets") ?? [];
-    return localStorage.setItem("budgets",
-        JSON.stringify([...existingBudgets, newItem])
-    )
 };
 
 // create expense
